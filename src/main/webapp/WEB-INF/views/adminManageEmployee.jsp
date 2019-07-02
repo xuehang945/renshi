@@ -43,6 +43,14 @@
 
     <div class="row clearfix">
         <div class="col-md-12 column">
+            <form action="/admin/manageEmployee/search.do"
+                  method="post">
+                <div class="col-md-4 data1">
+                    <input type="text" class="form-control" name="username"
+                           placeholder="username" value="">
+                </div>
+                <button type="submit" class="btn bg-maroon">搜索</button>
+            </form>
             <table class="table table-hover table-striped">
                 <thead>
                 <tr>

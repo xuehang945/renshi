@@ -14,6 +14,6 @@ public interface IEmployeeService {
     public List<EmployeeDO> allEmployee();
     public void updateEmployee(EmployeeDO employeeDO);
     public void deleteEmployee(Integer id);
-    public EmployeeDO queryEmployee(EmployeeDO employeeDO);
+    public List<EmployeeDO> searchEmployee(String username);
     public EmployeeDO selectById(int id);
 }

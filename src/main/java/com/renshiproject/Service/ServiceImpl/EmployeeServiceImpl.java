@@ -14,8 +14,8 @@ import java.util.List;
 public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
-    public EmployeeDO queryEmployee(EmployeeDO employeeDO) {
-        return employeeDOMapper.queryEmployee(employeeDO);
+    public List<EmployeeDO> searchEmployee(String username) {
+        return employeeDOMapper.searchEmployee(username);
     }
 
     @Override

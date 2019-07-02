@@ -1,5 +1,6 @@
 package com.renshiproject.controller;
 
+import com.mysql.jdbc.StringUtils;
 import com.renshiproject.Service.IAdminService;
 import com.renshiproject.Service.IEmployeeService;
 import com.renshiproject.dataobject.DepartmentDO;
@@ -87,17 +88,18 @@ public class AdminController {
 
 
     //查询员工信息，对应搜索
-    @RequestMapping("/adminQueryEmployee.do")
-    public ModelAndView queryEmployee(EmployeeDO employeeDO){
+    @RequestMapping("/manageEmployee/search.do")
+    public ModelAndView queryEmployee(String username){
         ModelAndView mv = new ModelAndView();
 
-        if(employeeDO==null){
+        List<EmployeeDO> employeeDOS = employeeService.searchEmployee(username);
+
+        if(!StringUtils.isNullOrEmpty(username)){
             mv.setViewName("adminQueryEmployee");
-            mv.addObject("adminQueryEmployeeResult",null);
+            mv.addObject("employeeInfos",null);
             return mv;
         }else{
-            employeeService.queryEmployee(employeeDO);
-            mv.addObject(("adminQueryEmployeeResult"));
+            mv.addObject(("employeeInfos"));
             return mv;
         }
     }

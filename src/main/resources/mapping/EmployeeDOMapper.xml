@@ -70,32 +70,10 @@
     where id=#{id,jdbcType=INTEGER}
   </select>
 
-  <select id="queryEmployee" parameterType="com.renshiproject.dataobject.EmployeeDO" resultType="com.renshiproject.dataobject.EmployeeDO">
+  <select id="searchEmployee" parameterType="java.lang.String" resultType="com.renshiproject.dataobject.EmployeeDO">
     select *
     from employee
-    <where>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="idNumber != null">
-        id_number = #{idNumber,jdbcType=CHAR},
-      </if>
-      <if test="phoneNumber != null">
-        phone_number = #{phoneNumber,jdbcType=CHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=CHAR},
-      </if>
-      <if test="deptId != null">
-        dept_id = #{deptId,jdbcType=INTEGER},
-      </if>
-      <if test="positionId != null">
-        position_id = #{positionId,jdbcType=INTEGER},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-    </where>
+    where username like '%${username}%'
   </select>
 
 
