@@ -47,10 +47,7 @@ public class AdminController {
     public ModelAndView addEmployee(EmployeeDO employeeDO){
         employeeService.addEmployee(employeeDO);
 
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("Mgs","添加成功");            //还未做错误处理
-        mv.setViewName("adminManageEmployee");
-        return  mv;
+        return  toManageEmployee();
     }
 
     //跳转到编辑员工信息页面
@@ -58,20 +55,21 @@ public class AdminController {
     public ModelAndView toEditEmployee(int id){
         EmployeeDO employeeDO = employeeService.selectById(id);
         ModelAndView mv = new ModelAndView();
+        mv.addObject("employeeInfo",employeeDO);
         mv.setViewName("adminEditEmployee");
 
         return mv;
     }
 
-    //编辑员工信息控制
-    @RequestMapping("/manageEmployee/updateEmployee")
+    //更新员工信息控制
+    @RequestMapping("/manageEmployee/updateEmployee.do")
     public ModelAndView editEmployee(EmployeeDO employeeDO){
         employeeService.updateEmployee(employeeDO);
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("Mgs","修改成功");            //还未做错误处理
-        mv.setViewName("admin");
-        return  mv;
+
+        return  toManageEmployee();
     }
 
     //删除员工控制
@@ -79,11 +77,8 @@ public class AdminController {
     public ModelAndView deleteEmployee(@RequestParam("id")int id){
         employeeService.deleteEmployee(id);
 
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("adminManageEmployee");
-        return mv;
+        return toManageEmployee();
     }
-
 
 
 
@@ -95,11 +90,12 @@ public class AdminController {
         List<EmployeeDO> employeeDOS = employeeService.searchEmployee(username);
 
         if(!StringUtils.isNullOrEmpty(username)){
-            mv.setViewName("adminQueryEmployee");
-            mv.addObject("employeeInfos",null);
+            mv.setViewName("adminManageEmployee");
+            mv.addObject("employeeInfos",employeeDOS);
             return mv;
         }else{
-            mv.addObject(("employeeInfos"));
+            mv.setViewName("adminManageEmployee");
+            mv.addObject("employeeInfos",employeeDOS);
             return mv;
         }
     }

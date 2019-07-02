@@ -10,38 +10,29 @@
 </head>
 <body>
 <div class="container">
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <div class="page-header">
-                <h1>
-                    基于SSM框架的管理系统：简单实现增、删、改、查。
-                </h1>
-            </div>
-        </div>
-    </div>
 
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="page-header">
                 <h1>
-                    <small>修改用户</small>
+                    <small>更新员工信息</small>
                 </h1>
             </div>
         </div>
     </div>
-
-    <h3 align="center">您的ID为：${userInfo.id}</h3>
 
     <form action="${pageContext.request.contextPath}/admin/manageEmployee/updateEmployee.do"
           method="post">
-        ID：<input type="text"  name="id" readonly="readonly" value="${employeeInfo.id}"/>
-        姓名：<input type="text" name="name" value="${employee.name}"/>
-        身份证号：<input type="text" name="idNumber" value="${employee.password}"/>
-        电话号码：<input type="text" name="phoneNumber" value="${employee.password}"/>
-        性别：<input type="text" name="gender" value="${employee.password}"/>
-        部门编号：<input type="text" name="deptId" value="${employee.password}"/>
-        职位编号：<input type="text" name="positionId" value="${employee.password}"/>
-        密码：<input type="text" name="password" value="${employee.password}"/>
+        <table>
+        <tr><td>ID：</td><td><input type="text"  name="id" readonly="readonly" value="${employeeInfo.id}"/></td></tr>
+        <tr><td>姓名：</td><td><input type="text" name="name" value="${employeeInfo.name}"/></td></tr>
+        <tr><td>身份证号：</td><td><input type="text" name="idNumber" value="${employeeInfo.idNumber}"/></tr>
+        <tr><td>电话号码：</td><td><input type="text" name="phoneNumber" value="${employeeInfo.phoneNumber}"/></td></tr>
+        <tr><td>性别：</td><td><input type="text" name="gender" value="${employeeInfo.gender}"/></td></tr>
+        <tr><td>部门编号：</td><td><input type="text" name="deptId" value="${employeeInfo.deptId}"/></td></tr>
+        <tr><td>职位编号：</td><td><input type="text" name="positionId" value="${employeeInfo.positionId}"/></td></tr>
+        <tr><td>密码：</td><td><input type="text" name="password" value="${employeeInfo.password}"/></td></tr>
+        </table>
         <input type="submit" value="提交" />
     </form>
 </div>

@@ -12,18 +12,15 @@
 </head>
 <body>
     <form method="post" action="/admin/manageEmployee/addEmployee.do">
-        <table class="table table-hover table-striped">
-            <thead>
-            <tr>
-                <td>ID：</td><input type="text" name="id">
-                <td>员工姓名：</td><input type="text" name="name">
-                <td>手机号：</td><input type="text" name="phoneNumber">
-                <td>身份证号：</td><input type="text" name="idNumber">
-                <td>性别：</td><input type="text" name="gender">
-                <td>部门：</td><input type="text" name="deptId">
-                <td>职位：</td><input type="text" name="positionId">
-                <td>密码：</td><input type="text" name="password">
-            </tr>
+        <table>
+            <tr><td>ID：</td><td><input type="text"  name="id" readonly="readonly"/></td></tr>
+            <tr><td>姓名：</td><td><input type="text" name="name"/></td></tr>
+            <tr><td>身份证号：</td><td><input type="text" name="idNumber"/></td></tr>
+            <tr><td>电话号码：</td><td><input type="text" name="phoneNumber"/></td></tr>
+            <tr><td>性别：</td><td><input type="text" name="gender"/></td></tr>
+            <tr><td>部门编号：</td><td><input type="text" name="deptId"/></td></tr>
+            <tr><td>职位编号：</td><td><input type="text" name="positionId"/></td></tr>
+            <tr><td>密码：</td><td><input type="text" name="password"/></td></tr>
         </table>
         <button type="submit" value="提交">提交</button>
     </form>

@@ -35,11 +35,6 @@
             <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/manageEmployee/toAddEmployee.do">新增员工</a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4 column">
-            <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/manageEmployee/toQueryEmployee.do">搜索</a>
-        </div>
-    </div>
 
     <div class="row clearfix">
         <div class="col-md-12 column">
