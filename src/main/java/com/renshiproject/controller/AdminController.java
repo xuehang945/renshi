@@ -2,13 +2,13 @@ package com.renshiproject.controller;
 
 import com.mysql.jdbc.StringUtils;
 import com.renshiproject.Service.IAdminService;
+import com.renshiproject.Service.IDepartmentService;
 import com.renshiproject.Service.IEmployeeService;
+import com.renshiproject.Service.IWageService;
 import com.renshiproject.dataobject.DepartmentDO;
 import com.renshiproject.dataobject.EmployeeDO;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +24,12 @@ public class AdminController {
 
     @Autowired
     private IEmployeeService employeeService;
+
+    @Autowired
+    private IDepartmentService departmentService;
+
+    @Autowired
+    private IWageService wageService;
 
     @RequestMapping("/manageEmployee.do")
     public ModelAndView toManageEmployee(){
@@ -103,10 +109,74 @@ public class AdminController {
 
 
 
-//    @RequestMapping("/manageDepartment/addDepartment.do")
-//    public ModelAndView addDepartment(DepartmentDO departmentDO){
-//        ModelAndView
-//    }
+    @RequestMapping("/manageDepartment.do")
+    public ModelAndView toManageDepartment(){
+        List<DepartmentDO> departmentDOS = departmentService.allDepartment();
+
+        ModelAndView mv =new ModelAndView();
+        mv.addObject("departmentInfos",departmentDOS);
+        mv.setViewName("adminManageDepartment");
+        return mv;
+    }
+
+    @RequestMapping("/manageDepartment/toAddDept.do")
+    public ModelAndView toAddDept(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("adminAddDepartment");
+        return mv;
+    }
+
+    //添加员工
+    @RequestMapping("/manageDepartment/addDept")
+    public ModelAndView addDept(DepartmentDO departmentDO){
+        departmentService.addDept(departmentDO);
+
+        return  toManageDepartment();
+    }
+
+    @RequestMapping("/manageDepartment/deleteDept.do")
+    public ModelAndView deleteDept(int id){
+        departmentService.deleteByPrimaryKey(id);
+
+        return toManageDepartment();
+    }
+
+
+    @RequestMapping("/manageDepartment/search.do")
+    public ModelAndView queryDept(String deptName){
+        ModelAndView mv = new ModelAndView();
+
+        List<DepartmentDO> departmentInfos = null;
+
+        if(!StringUtils.isNullOrEmpty(deptName)){
+            departmentInfos = departmentService.searchDept(deptName);
+        }
+        mv.setViewName("adminManageDepartment");
+        mv.addObject("departmentInfos",departmentInfos);
+        return mv;
+    }
+
+    //跳转到编辑员工信息页面
+    @RequestMapping("/manageDepartment/toUpdateDept.do")
+    public ModelAndView toUpdateDept(int id){
+        DepartmentDO departmentDO = departmentService.selectByPrimaryKey(id);
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("departmentInfo",departmentDO);
+        mv.setViewName("adminUpdateDepartment");
+
+        return mv;
+    }
+
+    //更新员工信息控制
+    @RequestMapping("/manageDepartment/updateDept.do")
+    public ModelAndView updateDept(DepartmentDO departmentDO){
+        departmentService.updateDept(departmentDO);
+
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("Mgs","修改成功");            //还未做错误处理
+
+        return  toManageEmployee();
+    }
 
 
 }
