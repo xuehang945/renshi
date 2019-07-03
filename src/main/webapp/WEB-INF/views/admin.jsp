@@ -12,6 +12,6 @@
 </head>
 <body>
 <a href="${pageContext.request.contextPath}/admin/manageEmployee.do">管理员工</a><br>
-<a href="${pageContext.request.contextPath}/admin/manageDepartment.do">管理员工</a><br>
+<a href="${pageContext.request.contextPath}/admin/manageDepartment.do">管理部门</a><br>
 </body>
 </html>

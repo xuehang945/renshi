@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.renshiproject.dao.AnnouncementDOMapper">
+
+    <insert id="addAnnouncement" parameterType="com.renshiproject.dataobject.AnnouncementDO">
+        insert into announcement
+        values(#{id,jdbcType=INTEGER},#{content,jdbcType=VARCHAR},#{time,jdbcType=DATETIME})
+    </insert>
+
+    <select id="allAnnouncement" resultType="com.renshiproject.dataobject.AnnouncementDO">
+        select * from announcement
+    </select>
+
+    <update id="updateAnnouncement" parameterType="com.renshiproject.dataobject.AnnouncementDO">
+        update announcement
+        set content = #{content,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteAnnouncement" parameterType="java.lang.Integer">
+        delete from announcement
+        where id = {id,jdbcType=INTEGER}
+    </delete>
+</mapper>

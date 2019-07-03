@@ -143,7 +143,7 @@ public class AdminController {
 
 
     @RequestMapping("/manageDepartment/search.do")
-    public ModelAndView queryDept(String deptName){
+    public ModelAndView searchDept(String deptName){
         ModelAndView mv = new ModelAndView();
 
         List<DepartmentDO> departmentInfos = null;
@@ -156,7 +156,7 @@ public class AdminController {
         return mv;
     }
 
-    //跳转到编辑员工信息页面
+    //跳转到编辑部门信息页面
     @RequestMapping("/manageDepartment/toUpdateDept.do")
     public ModelAndView toUpdateDept(int id){
         DepartmentDO departmentDO = departmentService.selectByPrimaryKey(id);
@@ -167,7 +167,7 @@ public class AdminController {
         return mv;
     }
 
-    //更新员工信息控制
+    //更新部门信息控制
     @RequestMapping("/manageDepartment/updateDept.do")
     public ModelAndView updateDept(DepartmentDO departmentDO){
         departmentService.updateDept(departmentDO);
@@ -175,8 +175,9 @@ public class AdminController {
         ModelAndView mv = new ModelAndView();
         mv.addObject("Mgs","修改成功");            //还未做错误处理
 
-        return  toManageEmployee();
+        return  toManageDepartment();
     }
 
+    @RequestMapping("")
 
 }

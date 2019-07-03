@@ -25,9 +25,10 @@ public class DepartmentService implements IDepartmentService {
     }
 
     @Override
-    public int insert(DepartmentDO record) {
-        return departmentDOMapper.insert(record);
+    public void addDept(DepartmentDO record) {
+        if(record!=null) departmentDOMapper.insert(record);
     }
+
 
     @Override
     public int insertSelective(DepartmentDO record) {

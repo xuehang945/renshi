@@ -11,7 +11,7 @@ public interface IDepartmentService {
     public int deleteByPrimaryKey(Integer deptId);
 
 
-    public int addDept(DepartmentDO record);
+    public void addDept(DepartmentDO record);
 
     public int insertSelective(DepartmentDO record);
 
