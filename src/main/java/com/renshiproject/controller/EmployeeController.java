@@ -3,6 +3,7 @@ package com.renshiproject.controller;
 
 import com.renshiproject.Service.IEmployeeService;
 import com.renshiproject.dataobject.EmployeeDO;
+import com.renshiproject.dataobject.WageDO;
 import com.renshiproject.viewObject.EmployeeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,15 @@ public class EmployeeController {
         ModelAndView mv = new ModelAndView();
         mv.addObject("employeeVO",employeeVO);
         mv.setViewName("employeeInfo");
+        return mv;
+    }
+
+    @RequestMapping("/getWageInfo")
+    public ModelAndView getWageInfo(int id){
+        WageDO wageDO = employeeService.getWageInfo(id);
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("wageInfo",wageDO);
+        mv.setViewName("employeeWage");
         return mv;
     }
 

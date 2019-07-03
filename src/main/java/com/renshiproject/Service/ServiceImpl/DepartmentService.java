@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DepartmentService implements IDepartmentService {
+public class    DepartmentService implements IDepartmentService {
 
     private DepartmentDOMapper departmentDOMapper;
 

@@ -5,7 +5,7 @@ import java.sql.Date;
 public class AnnouncementDO {
     private int id;
     private String content;
-    private Date time;
+    private String time;
 
     public int getId() {
         return id;
@@ -23,11 +23,11 @@ public class AnnouncementDO {
         this.content = content;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

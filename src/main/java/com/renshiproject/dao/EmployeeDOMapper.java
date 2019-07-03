@@ -63,4 +63,6 @@ public interface EmployeeDOMapper {
      * @mbg.generated Sat Jun 29 09:14:49 CST 2019
      */
     int updateByPrimaryKey(EmployeeDO record);
+
+    int deleteFromDept(int id);
 }

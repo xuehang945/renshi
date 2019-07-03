@@ -4,9 +4,11 @@ import com.renshiproject.Service.IAnnouncementService;
 import com.renshiproject.dao.AnnouncementDOMapper;
 import com.renshiproject.dataobject.AnnouncementDO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AnnouncementServiceImpl implements IAnnouncementService {
 
     @Autowired

@@ -1,6 +1,7 @@
 package com.renshiproject.Service;
 
 import com.renshiproject.dataobject.EmployeeDO;
+import com.renshiproject.dataobject.WageDO;
 import com.renshiproject.viewObject.EmployeeVO;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +17,6 @@ public interface IEmployeeService {
     public void deleteEmployee(Integer id);
     public List<EmployeeDO> searchEmployee(String username);
     public EmployeeDO selectById(int id);
+    public void deleteFromDept(int id);
+    public WageDO getWageInfo(int id);
 }

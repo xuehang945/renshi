@@ -3,6 +3,7 @@ package com.renshiproject.Service.ServiceImpl;
 import com.renshiproject.Service.IEmployeeService;
 import com.renshiproject.dao.EmployeeDOMapper;
 import com.renshiproject.dataobject.EmployeeDO;
+import com.renshiproject.dataobject.WageDO;
 import com.renshiproject.viewObject.EmployeeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public void deleteEmployee(Integer id) {
         employeeDOMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void deleteFromDept(int id) {
+        employeeDOMapper.deleteFromDept(id);
     }
 
     @Override
@@ -55,5 +61,9 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public EmployeeVO getEmployeeInfoById(int id) {
         return employeeDOMapper.selectById2VO(id);
+    }
+
+    public WageDO getWageInfo(int id){
+        return null;
     }
 }

@@ -206,4 +206,9 @@
       password = #{password,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <delete id="deleteFromDept" parameterType="java.lang.Integer">
+   delete from employee
+   where dept_id = #{id,jdbcType=INTEGER}
+  </delete>
 </mapper>

@@ -1,18 +1,20 @@
 package com.renshiproject.controller;
 
 import com.mysql.jdbc.StringUtils;
-import com.renshiproject.Service.IAdminService;
-import com.renshiproject.Service.IDepartmentService;
-import com.renshiproject.Service.IEmployeeService;
-import com.renshiproject.Service.IWageService;
+import com.renshiproject.Service.*;
+import com.renshiproject.dataobject.AnnouncementDO;
 import com.renshiproject.dataobject.DepartmentDO;
 import com.renshiproject.dataobject.EmployeeDO;
+import com.renshiproject.viewObject.EmployeeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -30,6 +32,9 @@ public class AdminController {
 
     @Autowired
     private IWageService wageService;
+
+    @Autowired
+    private IAnnouncementService announcementService;
 
     @RequestMapping("/manageEmployee.do")
     public ModelAndView toManageEmployee(){
@@ -49,9 +54,24 @@ public class AdminController {
     }
 
     //添加员工
+    @Transactional
     @RequestMapping("/manageEmployee/addEmployee")
     public ModelAndView addEmployee(EmployeeDO employeeDO){
         employeeService.addEmployee(employeeDO);
+
+        EmployeeVO employeeVO = employeeService.getEmployeeInfoById(employeeDO.getId());
+
+        AnnouncementDO announcementDO = new AnnouncementDO();
+        announcementDO.setContent("部门："+employeeVO.getDepartment()+"迎来新员工:"
+                +employeeVO.getPosition()+" "+employeeVO.getName()+"   欢迎加入大家庭");
+
+        //获得当前时间并转换成字符串
+        SimpleDateFormat dateFormat = new SimpleDateFormat(" yyyy-MM-dd ");
+        String currentDate =   dateFormat.format( new Date() );
+
+        //添加公告
+        announcementDO.setTime(currentDate);
+        announcementService.addAnnouncement(announcementDO);
 
         return  toManageEmployee();
     }
@@ -79,9 +99,23 @@ public class AdminController {
     }
 
     //删除员工控制
+    @Transactional
     @RequestMapping("/manageEmployee/deleteEmployee.do")
     public ModelAndView deleteEmployee(@RequestParam("id")int id){
+        EmployeeVO employeeVO = employeeService.getEmployeeInfoById(id);
         employeeService.deleteEmployee(id);
+
+        AnnouncementDO announcementDO = new AnnouncementDO();
+        announcementDO.setContent(employeeVO.getDepartment()+"的"+employeeVO.getPosition()
+        +" "+employeeVO.getName()+" 办理了离职手续，祝他一路顺风");
+
+        //获得当前时间并转换成字符串
+        SimpleDateFormat dateFormat = new SimpleDateFormat(" yyyy-MM-dd ");
+        String currentDate =   dateFormat.format( new Date() );
+
+        //添加公告
+        announcementDO.setTime(currentDate);
+        announcementService.addAnnouncement(announcementDO);
 
         return toManageEmployee();
     }
@@ -126,7 +160,7 @@ public class AdminController {
         return mv;
     }
 
-    //添加员工
+    //添加部门
     @RequestMapping("/manageDepartment/addDept")
     public ModelAndView addDept(DepartmentDO departmentDO){
         departmentService.addDept(departmentDO);
@@ -136,7 +170,20 @@ public class AdminController {
 
     @RequestMapping("/manageDepartment/deleteDept.do")
     public ModelAndView deleteDept(int id){
+        //先删除部门中的员工
+        employeeService.deleteFromDept(id);
         departmentService.deleteByPrimaryKey(id);
+
+        AnnouncementDO announcementDO = new AnnouncementDO();
+        announcementDO.setContent("ID为 "+id+"的部门与今日解散，祝愿所有员工前程似锦！");
+
+        //获得当前时间并转换成字符串
+        SimpleDateFormat dateFormat = new SimpleDateFormat(" yyyy-MM-dd ");
+        String currentDate =   dateFormat.format( new Date() );
+
+        //添加公告
+        announcementDO.setTime(currentDate);
+        announcementService.addAnnouncement(announcementDO);
 
         return toManageDepartment();
     }
@@ -173,11 +220,11 @@ public class AdminController {
         departmentService.updateDept(departmentDO);
 
         ModelAndView mv = new ModelAndView();
-        mv.addObject("Mgs","修改成功");            //还未做错误处理
+        mv.addObject("msg","修改成功");            //还未做错误处理
+
 
         return  toManageDepartment();
     }
 
-    @RequestMapping("")
 
 }
