@@ -4,7 +4,7 @@
 
     <insert id="addAnnouncement" parameterType="com.renshiproject.dataobject.AnnouncementDO">
         insert into announcement(content,time)
-        values(#{content,jdbcType=VARCHAR},#{time,jdbcType=DATETIME})
+        values(#{content,jdbcType=VARCHAR},#{time,jdbcType=VARCHAR})
     </insert>
 
     <select id="allAnnouncement" resultType="com.renshiproject.dataobject.AnnouncementDO">
@@ -21,4 +21,6 @@
         delete from announcement
         where id = {id,jdbcType=INTEGER}
     </delete>
+
+
 </mapper>

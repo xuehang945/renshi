@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.renshiproject.dao.IAdminDao" >
+
+<insert id="addPosition">
+    insert into position values (null,#{addPositionName})
+</insert>
+
+<select id="findAllPosition" resultType="com.renshiproject.bean.position">
+    select * from position
+</select>
+
+    <select id="findAllDepartment" resultType="com.renshiproject.bean.department">
+        select * from department
+    </select>
+
+    <update id="renamePosition">
+        update position
+        set position_name=#{renamePositionName}
+        where position_id=#{position_id}
+    </update>
+
+    <select id="searchPosition" resultType="com.renshiproject.pojo.allEmployeeInfo">
+        select id,name,id_number,phone_number,gender,dept_name,position_name
+        from employee,position,department
+        where employee.id=#{id} and employee.dept_id=department.dept_id and employee.position_id=position.position_id
+    </select>
+
+    <select id="searchAllAward_punish" resultType="com.renshiproject.pojo.allAward_punishInfo">
+        select award_punish.id,employee_id,employee_name,dept_name,position_name,award_reason,award_money,punish_reason,punish_money,time
+        from award_punish,position,department
+        where award_punish.position_id=position.position_id and award_punish.dept_id=department.dept_id
+    </select>
+
+    <select id="searchAward_punish" resultType="com.renshiproject.pojo.allAward_punishInfo">
+        select award_punish.id,employee_id,employee_name,dept_name,position_name,award_reason,award_money,punish_reason,punish_money,time
+        from award_punish,position,department
+        where award_punish.employee_id=#{employee_id} and award_punish.time=#{date} and award_punish.position_id=position.position_id and award_punish.dept_id=department.dept_id
+    </select>
+
+    <delete id="deletePosition">
+        delete from position where position_id=#{position_id}
+    </delete>
+
+    <insert id="addAward_punish">
+        insert into award_punish(id,employee_id,employee_name,dept_id,position_id,award_reason,award_money,punish_reason,punish_money,time)
+        value (
+        null,
+        #{award_punish.employee_id},
+        #{award_punish.employee_name},
+        #{award_punish.dept_id},
+        #{award_punish.position_id},
+        #{award_punish.award_reason},
+        #{award_punish.award_money},
+        #{award_punish.punish_reason},
+        #{award_punish.punish_money},
+        #{award_punish.time}
+        )
+    </insert>
+
+    <update id="updateAward_punish">
+        update award_punish
+        set
+        employee_name=#{award_punish.employee_name},
+        dept_id=#{award_punish.dept_id},
+        position_id=#{award_punish.position_id},
+        award_reason=#{award_punish.award_reason},
+        award_money=#{award_punish.award_money},
+        punish_reason=#{award_punish.punish_reason},
+        punish_money=#{award_punish.punish_money},
+        time=#{award_punish.time}
+        where
+        employee_id=#{award_punish.employee_id} and time=#{award_punish.time}
+    </update>
+
+    <delete id="deleteAward_punish">
+        delete from award_punish
+        where employee_id=#{employee_id} and time=#{date}
+    </delete>
+
+    <insert id="addWage" parameterType="com.renshiproject.bean.wage">
+        insert into wage (employee_id,employee_name,dept_name,position,basic_wage,award,punish_money,salary,time) value (#{employee_id},#{employee_name},#{dept_name},#{position},#{basic_wage},#{award},#{punish_money},#{salary},#{time})
+    </insert>
+
+    <select id="findAllWage" resultType="com.renshiproject.bean.wage">
+        select * from wage
+    </select>
+
+
+    <select id="searchLateAndAbsence" resultType="com.renshiproject.bean.attendance">
+        select * from attendance
+        where employee_id=#{employee_id} and time=#{date}
+    </select>
+
+
+    <delete id="deleteWage">
+        delete from wage
+        where employee_id=#{employee_id} and time=#{date}
+    </delete>
+
+</mapper>

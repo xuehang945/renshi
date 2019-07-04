@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.renshiproject.dao.ILoginDao" >
+
+    <select id="administratorinfoLogin" resultType="com.renshiproject.bean.administratorinfo">
+    select * from administratorinfo where id=#{id} and password=#{password}
+</select>
+
+    <select id="manager_infoLogin" resultType="com.renshiproject.bean.manager_info">
+    select * from manager_info where id=#{id} and password=#{password}
+</select>
+
+    <select id="employeeLogin" resultType="com.renshiproject.pojo.allEmployeeInfo">
+        select id,name,id_number,phone_number,gender,dept_name,position_name
+        from employee,position,department
+        where
+        employee.id=#{id} and employee.password=#{password} and employee.dept_id=department.dept_id and employee.position_id=position.position_id
+</select>
+
+
+</mapper>

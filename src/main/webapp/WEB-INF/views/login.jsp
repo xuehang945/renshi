@@ -1,27 +1,19 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2019/6/27 0027
-  Time: 13:44
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" isELIgnored="false"%>
 <html>
-<head>
-    <title>用户登录</title>
-
-    <form action="login/check.do" method="post">
-        <table align="center">
-            <tr><td>ID：</td><td><input type="text" name="id"/></td></tr>
-            <tr><td>密码：  </td><td><input type="text" name="password"/></td></tr>
-            <tr><td>类别：  </td><td><input type="radio" name="role" value="员工">员工
-                <input type="radio" name="role" value="经理">经理</td></tr>
-                <input type="radio" name="role" value="管理员">管理员</td></tr>
-            <tr><td><button type="submit" value="登录">登录</button></td></tr>
-        </table>
-    </form>
-</head>
 <body>
-
+<form action="${pageContext.request.contextPath}/login/login.do" method="post">
+    用户名：<input type="text" name="id">
+    <br>
+    密码：<input type="password" name="password">
+    <br>
+    角色：<select name="role">
+    <option value="employee">员工</option>
+    <option value="manager">经理</option>
+    <option value="admin">管理员</option>
+</select>
+    <br>
+    <input type="submit" value="登录">
+</form>
 </body>
 </html>

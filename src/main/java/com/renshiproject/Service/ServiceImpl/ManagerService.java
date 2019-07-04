@@ -1,29 +1,19 @@
 package com.renshiproject.Service.ServiceImpl;
 
-import com.renshiproject.Service.IManagerService;
 import com.renshiproject.bean.attendance;
 import com.renshiproject.bean.employee;
 import com.renshiproject.dao.IManagerDao;
 import com.renshiproject.dao.ManagerInfoDOMapper;
 import com.renshiproject.dataobject.ManagerInfoDO;
 import com.renshiproject.pojo.allEmployeeInfo;
+import com.renshiproject.Service.IManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
-public class ManagerServiceImpl implements IManagerService {
-
-    @Autowired
-    private ManagerInfoDOMapper managerInfoDOMapper;
-
-    @Override
-    public ManagerInfoDO checkManager(ManagerInfoDO managerInfoDO) {
-        return managerInfoDOMapper.selectByIdAndPwd(managerInfoDO);
-    }
-
+public class ManagerService implements IManagerService {
     @Autowired
     IManagerDao managerDao;
     @Override
@@ -40,5 +30,13 @@ public class ManagerServiceImpl implements IManagerService {
     @Override
     public List<attendance> findAllAttendance() {
         return managerDao.findAllAttendance();
+    }
+
+    @Autowired
+    private ManagerInfoDOMapper managerInfoDOMapper;
+
+    @Override
+    public ManagerInfoDO checkManager(ManagerInfoDO managerInfoDO) {
+        return managerInfoDOMapper.selectByIdAndPwd(managerInfoDO);
     }
 }
